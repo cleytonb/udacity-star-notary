@@ -67,6 +67,16 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     await instance.putStarUpForSale(starId, starPrice, {from: user1});
     const balanceOfUser2BeforeTransaction = web3.utils.toBN(await web3.eth.getBalance(user2));
     const txInfo = await instance.buyStar(starId, {from: user2, value: balance});
+
+
+    /***************
+     * Since the provided code is not working, I looked at https://github.com/udacity/nd1309-p2-Decentralized-Star-Notary-Service-Starter-Code/pull/16
+     * and noticed that there's a pending pull request that fixes the bug. I understand that this is not directly relevant to the concepts being assessed.
+     * 
+     * The author of this pull request is samraul (https://github.com/samraul)
+     * 
+     * START OF CODE
+    ****************/
     const balanceAfterUser2BuysStar = web3.utils.toBN(await web3.eth.getBalance(user2));    
 
     // Important! Note that because these are big numbers (more than Number.MAX_SAFE_INTEGER), we
@@ -85,6 +95,9 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     const starPriceBN = web3.utils.toBN(starPrice); // from string
     const expectedFinalBalance = balanceOfUser2BeforeTransaction.sub(starPriceBN).sub(txGasCost);
     assert.equal(expectedFinalBalance.toString(), balanceAfterUser2BuysStar.toString());
+    /*************
+     * END OF CODE
+     *************/
 });
 
 // Implement Task 2 Add supporting unit tests
